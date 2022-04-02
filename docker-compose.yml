@@ -1,0 +1,23 @@
+version: "3"
+volumes:
+  certbot-config:
+  certbot-work:
+services:
+  certbot:
+    image: certbot/certbot:v1.25.0
+    volumes:
+      - certbot-config:/etc/letsencrypt
+      - certbot-work:/var/lib/letsencrypt
+    command: certonly --manual --preferred-challenges dns -d '${DOMAINS}' --test-cert
+  busybox: &busybox
+    image: busybox:1.34.1
+    volumes:
+      - certbot-config:/etc/letsencrypt
+      - certbot-work:/var/lib/letsencrypt
+      - ./backups:/backups
+  backup:
+    <<: *busybox
+    command: tar c -f /backups/certs.tar -C / etc/letsencrypt var/lib/letsencrypt
+  restore:
+    <<: *busybox
+    command: tar x -f /backups/certs.tar -C /
