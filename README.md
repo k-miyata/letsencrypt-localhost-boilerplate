@@ -8,7 +8,7 @@ use only. Do not use this for production.
 ## Installation from the template
 
 Click the _Use this template_ button on the top page of this template repository
-to create your own repository to manage and back up your certificates.
+to create your own repository for managing and backing up your certificates.
 
 **Important:** Don't forget to make your repository private.
 
@@ -29,19 +29,19 @@ Then, run this command to obtain or renew a certificate for that domains:
 docker compose run --rm certbot
 ```
 
-### Backing up a certificate
+### Backing up certificates
 
-Run this command to get an archive of a certificate and the Certbot
-configuration for it from the Docker volumes:
+Run this command to get an archive of certificates and Certbot configurations
+for them from the Docker volumes:
 
 ```sh
 docker compose run --rm backup
 ```
 
-### Restoring a certificate
+### Restoring certificates
 
-Run this command to store a certificate and the Certbot configuration for it
-extracted from a backup in the Docker volume:
+Run this command to store certificates and Certbot configurations for them
+extracted from a backup in the Docker volumes:
 
 ```sh
 docker compose run --rm restore
@@ -56,7 +56,7 @@ it. First, generate a key of [age](https://github.com/FiloSottile/age):
 age-keygen -o key.txt
 ```
 
-Keep this key in a safe place. Of cource, do not push it to a remote repository.
+Keep this key in a safe place. Of course, do not push it to a remote repository.
 
 Next, encrypt the backup with the recipient generated with that key:
 
@@ -69,7 +69,7 @@ push to a remote repository.
 
 **Important:** As explained below, decrypting an encrypted backup requires the
 key generated above. If this key is lost and the Docker volumes is also deleted,
-you will have no way to access your certificate.
+you will have no way to access your certificates.
 
 ### Decrypting an encrypted backup
 
@@ -81,7 +81,7 @@ specified when encrypting. Run this command to decrypt with that key:
 ```
 
 Then, a decrypted backup `certs.tar` is generated. Restoring this file with the
-command described above will allow Certbot to manage a certificate again.
+command described above will allow Certbot to manage the certificates again.
 
 ## License
 
